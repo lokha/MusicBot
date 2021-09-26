@@ -3,8 +3,10 @@ package com.jagrosh.jmusicbot.commands.other;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Команда, которая отвечает на любой вопрос.
@@ -42,7 +44,10 @@ public class QuestionCmd extends Command {
             return;
         }
 
-        int answerIndex = getAnswerIndex(args.hashCode(), allAnswers.size());
+        LocalDate currentdate = LocalDate.now();
+        int currentDay = currentdate.getDayOfMonth();
+        int questionHash = Objects.hash(args, currentDay);
+        int answerIndex = getAnswerIndex(questionHash, allAnswers.size());
         String answer = allAnswers.get(answerIndex);
         event.replySuccess(answer);
     }
