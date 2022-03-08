@@ -16,12 +16,13 @@
 package com.jagrosh.jmusicbot.settings;
 
 import com.jagrosh.jdautilities.command.GuildSettingsProvider;
-import java.util.Collection;
-import java.util.Collections;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.VoiceChannel;
+
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  *
@@ -38,6 +39,7 @@ public class Settings implements GuildSettingsProvider
     private RepeatMode repeatMode;
     private String prefix;
     private double skipRatio;
+private String joinSongUrl = "https://mineland.net/lokha/surprise-motherfucker.mp3";
 
     public Settings(SettingsManager manager, String textId, String voiceId, String roleId, int volume, String defaultPlaylist, RepeatMode repeatMode, String prefix, double skipRatio)
     {
@@ -179,6 +181,15 @@ public class Settings implements GuildSettingsProvider
     public void setSkipRatio(double skipRatio)
     {
         this.skipRatio = skipRatio;
+        this.manager.writeSettings();
+    }
+
+    public String getJoinSongUrl() {
+        return joinSongUrl;
+    }
+
+    public void setJoinSongUrl(String joinSongUrl) {
+        this.joinSongUrl = joinSongUrl;
         this.manager.writeSettings();
     }
 }
